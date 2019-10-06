@@ -1,0 +1,1 @@
+void buildMaxHeap(int *maxHeap, int heapSize, int dim_array);
