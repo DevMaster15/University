@@ -34,18 +34,7 @@ public class Project {
         System.out.println("Risultato Maestro = " + risultatoMaestro);
     }
 
-    /**
-     * Start è la funzione da cui parte l'intera procedura
-     * c'è la prima chiamata a pivot e partition per sistemare l'array attorno ad un valore
-     * le somme degli elementi a sinistra e destra del pivot
-     * la somma di tutti gli elementi
-     *
-     * e la chiamata alla procedura medianaPesata
-     *
-     * @param array di valori double
-     * @return 0 se la sommaTotale (di tutti gli elementi = 0)
-     * @return il risultato della procedua medianaPesata() che sarà la mediana pesata inferiore
-     */
+    
 
     public static double start(double array[]) {
         int left = 0;

@@ -8,8 +8,9 @@
       <change beforePath="$PROJECT_DIR$/../Algoritmi_C/main.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Algoritmi_C/maxHeapify.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/test.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +87,8 @@
       <workItem from="1574267603046" duration="1654000" />
       <workItem from="1574323884895" duration="1992000" />
       <workItem from="1574326014417" duration="669000" />
-      <workItem from="1574327389150" duration="5847000" />
+      <workItem from="1574327389150" duration="6946000" />
+      <workItem from="1574339978129" duration="1207000" />
     </task>
     <task id="LOCAL-00001" summary="Ho aggiunto un commento sopra il main">
       <created>1574327513129</created>
@@ -106,7 +108,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
