@@ -12,10 +12,12 @@ public class CalcoloTempi {
 
         String[] parts = input.split(" +");
         int[] inputFinal = new int[parts.length];
+
         for (int j = 0; j < inputFinal.length; j++) {
             int e = Integer.parseInt(parts[j]);
             inputFinal[j] = e;
         }
+
         int n = inputFinal[0];
         seedList.insert( (double) System.currentTimeMillis()/100000);
         double tMin = tMin();

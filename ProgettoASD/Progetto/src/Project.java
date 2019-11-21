@@ -48,65 +48,38 @@ public class Project {
      */
 
     public static double start(double array[]) {
-        int p = pivot(array, 0, array.length - 1);
-        int index = partition(array, 0, array.length - 1, p);
+        int left = 0;
+        int right = array.length - 1;
+        int p = pivot(array, left, right);
+        int pivotIndex = partition(array, left, right, p);
 
-        double sommaLeftPivot = add(array, 0, index - 1); //somma da  fino all'elemento
-        double sommaRightPivot = add(array, index + 1, array.length - 1); //ok
-        double sommaTotale = sommaRightPivot + sommaLeftPivot + array[index];
+        double sommaLeftPivot = add(array, 0, pivotIndex - 1); //somma da  fino all'elemento
+        double sommaRightPivot = add(array, pivotIndex + 1, array.length - 1); //ok
+        double sommaTotale = sommaRightPivot + sommaLeftPivot + array[pivotIndex];
+        double sommaMezzi = sommaTotale/2;
 
         if(sommaTotale == 0)
             return 0;
-        else
-            return medianaPesata(array, 0, array.length - 1, sommaTotale, sommaLeftPivot, sommaRightPivot, index, sommaTotale / 2);
-    }
+        else{
+            while(!(sommaLeftPivot < sommaMezzi && sommaRightPivot <= sommaMezzi)){
+                if(sommaLeftPivot >= sommaMezzi){
+                    right = pivotIndex;
+                    p = pivot(array, left, right);
+                    pivotIndex = partition(array, left, right, p);
+                    sommaRightPivot = sommaRightPivot + add(array, pivotIndex + 1, right);
+                    sommaLeftPivot = sommaTotale - sommaRightPivot - array[pivotIndex];
+                } else {
+                    left = pivotIndex;
+                    p = pivot(array, left, right);
+                    pivotIndex = partition(array, left, right, p);
+                    sommaLeftPivot = sommaLeftPivot + add(array, left, pivotIndex - 1);
+                    sommaRightPivot = sommaTotale - sommaLeftPivot - array[pivotIndex];
+                }
+            }
 
-    /**
-     * Questa procedura inizialmente controlla se il valore nella posizione index dell'array è la mediana pesata inferiore
-     * nel caso in cui rispetti le condizioni dell'if, ritorno il valore
-     *
-     * sennò controllo se la somma degli elementi minori del pivot è maggiore o uguale alla metà della somma totale
-     * se lo è significa che il pivot si trova in quella parte dell'array. Quindi ricalcolo il pivot con la procedura pivot
-     * partendo dall'indice a sinistra dell'array (o del sottoarray) fino all'indice del pivot precedente
-     * sistemo l'array intorno a quel pivot e restituisco l'indice di dove sarebbe l'elemento pivot se l'array fosse ordinato
-     * rifaccio le somme right e left
-     * e richiamo la procedura medianaPesata
-     *
-     * altrimenti, se il primo if non è soddisfatto significa che la mediana pesata inferiore si trova nella parte destra dell'array
-     * quindi si rifanno tutte le procedure di prima
-     *
-     * @param array di valori double
-     * @param left indice sinistro dell'array (o sottoarray)
-     * @param right indice destro dell'array (o sottoarray)
-     * @param sommaTotale somma di tutti gli elementi dell'array (o sottoarray)
-     * @param sommaLeftPivot somma degli elementi a sinistra del pivot
-     * @param sommaRightPivot somma degli elementi a destra del pivot
-     * @param index indice del pivot attuale
-     * @param sommaMezzi somma di tutti gli elementi dell'array originale / 2
-     * @return array[index] se esso è la mediana pesata inferiore
-     */
-    public static double medianaPesata(double array[], int left, int right, double sommaTotale, double sommaLeftPivot,
-                                       double sommaRightPivot, int index, double sommaMezzi) {
-
-        if (sommaLeftPivot < sommaMezzi && sommaRightPivot <= sommaMezzi) {
-            return array[index];
-        } else if (sommaLeftPivot >= sommaMezzi) {
-            int tmpright = index;
-            int p = pivot(array, left, tmpright);
-            int tmpindex = partition(array, left, tmpright, p);
-            double tmpsumRight = sommaRightPivot + add(array, tmpindex + 1, tmpright); //
-            double tmpsumLeft = sommaTotale - tmpsumRight - array[tmpindex];
-            return medianaPesata(array, left, tmpright, sommaTotale, tmpsumLeft, tmpsumRight, tmpindex, sommaMezzi);
-        } else {
-            int tmpleft = index;
-            int p = pivot(array, tmpleft, right);
-            int tmpindex = partition(array, tmpleft, right, p);
-            double tmpsumLeft = sommaLeftPivot + add(array, tmpleft, tmpindex - 1);
-            double tmpsumRight = sommaTotale - tmpsumLeft - array[tmpindex];
-            return medianaPesata(array, tmpleft, right, sommaTotale, tmpsumLeft, tmpsumRight, tmpindex, sommaMezzi);
         }
 
-
+        return array[pivotIndex];
     }
 
     /**

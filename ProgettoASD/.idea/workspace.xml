@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="795a8d4c-45e5-441a-8e78-723ba2cdb937" name="Default Changelist" comment="" />
+    <list default="true" id="795a8d4c-45e5-441a-8e78-723ba2cdb937" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Algoritmi_C/buildMaxHeap.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Algoritmi_C/buildmaxheap.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Algoritmi_C/functions.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Algoritmi_C/main.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Algoritmi_C/maxHeapify.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/test.txt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,11 +31,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1TWOzX6mONt58VA0TEUNP5Dw4di" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -76,10 +89,34 @@
       <workItem from="1574267603046" duration="1654000" />
       <workItem from="1574323884895" duration="1992000" />
       <workItem from="1574326014417" duration="669000" />
+      <workItem from="1574327389150" duration="5178000" />
     </task>
+    <task id="LOCAL-00001" summary="Ho aggiunto un commento sopra il main">
+      <created>1574327513129</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574327513129</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ho aggiunto un commento sopra il main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ho aggiunto un commento sopra il main" />
   </component>
 </project>
