@@ -1,9 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class CalcoloTempi {
     public static seedStorage seedList = new seedStorage();
+    public static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         System.out.println("Inserisci la dimensione dell'array: ");
@@ -205,6 +207,7 @@ public class CalcoloTempi {
             return 0;
         else{
             while(!(sommaLeftPivot < sommaMezzi && sommaRightPivot <= sommaMezzi)){
+                //input.nextLine();
                 if(sommaLeftPivot >= sommaMezzi){
                     right = pivotIndex;
                     p = pivot(array, left, right);

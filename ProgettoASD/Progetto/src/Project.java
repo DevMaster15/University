@@ -10,6 +10,8 @@ public class Project {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String input = "";
 
+        System.out.println("Start");
+
         //prendo l'input da standard input, nella pratica reindirizzo da un file di testo
         try {
             input = reader.readLine();
@@ -29,9 +31,20 @@ public class Project {
             array[i] = Double.valueOf(str[i]);
         }
 
-        double risultatoMaestro = start(array); //memorizzo il risultato finale nella variabile risultatoMaestro
+        double t0 = (double) System.currentTimeMillis();
 
-        System.out.println("Risultato Maestro = " + risultatoMaestro);
+        //double risultatoMaestro = start(array); //memorizzo il risultato finale nella variabile risultatoMaestro
+        double t1 = (double) System.currentTimeMillis();
+        int valore = partition(array, 0, array.length - 1, 0);
+        for(int i=0;i<array.length-1;i++){
+            System.out.print(array[i] + " ");
+        }
+
+        System.out.println("valore: " + valore);
+        System.out.println("array["+valore+"] = " + array[valore]);
+
+        //System.out.println("Risultato = " + risultatoMaestro + "\nTempo: " + (t1-t0));
+
     }
 
     
@@ -42,16 +55,18 @@ public class Project {
         int p = pivot(array, left, right);
         int pivotIndex = partition(array, left, right, p);
 
-        double sommaLeftPivot = add(array, 0, pivotIndex - 1); //somma da  fino all'elemento
-        double sommaRightPivot = add(array, pivotIndex + 1, array.length - 1); //ok
+        double sommaLeftPivot = add(array, 0, pivotIndex - 1); //somma da 0 fino all'elemento
+        double sommaRightPivot = add(array, pivotIndex + 1, right ); //ok
         double sommaTotale = sommaRightPivot + sommaLeftPivot + array[pivotIndex];
         double sommaMezzi = sommaTotale/2;
 
         if(sommaTotale == 0)
             return 0;
+
         else{
             while(!(sommaLeftPivot < sommaMezzi && sommaRightPivot <= sommaMezzi)){
                 if(sommaLeftPivot >= sommaMezzi){
+
                     right = pivotIndex;
                     p = pivot(array, left, right);
                     pivotIndex = partition(array, left, right, p);
@@ -63,6 +78,7 @@ public class Project {
                     pivotIndex = partition(array, left, right, p);
                     sommaLeftPivot = sommaLeftPivot + add(array, left, pivotIndex - 1);
                     sommaRightPivot = sommaTotale - sommaLeftPivot - array[pivotIndex];
+
                 }
             }
 
@@ -96,7 +112,8 @@ public class Project {
             return insertionSortMedian(array, left, right);
         }
 
-        int count = left;
+
+        int contaPosizione = left;
 
         for (int i = left; i <= right; i += 5) {
             int tmpRight = i + 4;
@@ -107,11 +124,11 @@ public class Project {
 
             int tmpMed;
             tmpMed = insertionSortMedian(array, i, tmpRight);
-            swap(array, tmpMed, count);
-            count++;
+            swap(array, tmpMed, contaPosizione);
+            contaPosizione++;
         }
-        count--;
-        return pivot(array, left, count);
+
+        return pivot(array, left, contaPosizione--);
     }
 
     /**
@@ -127,11 +144,49 @@ public class Project {
      * @return
      */
 
-    public static int partition(double[] array, int left, int right, int p) {
+    // Partitions arr[0..n-1] around [lowVal..highVal]
+    public static int partition(double[] array, int left, int right) {
+
+        int  n = array.length;
+
+        // Initialize ext available positions for
+        // smaller (than range) and greater lements
+        int start = 0, end = n-1;
+
+        // Traverse elements from left
+        for(int i = 0; i <= end;) {
+
+            // If current element is smaller than
+            // range, put it on next available smaller
+            // position.
+
+            if(array[i] < array[left]) {
+                swap(array, start, i);
+                start++;
+                i++;
+            }
+
+            // If current element is greater than
+            // range, put it on next available greater
+            // position.
+            else if(array[i] > array[right]) {
+                swap(array, i, end);
+                end--;
+            }
+
+            else
+                i++;
+        }
+
+    }
+
+    /*public static int partition(double[] array, int left, int right, int p) {
+
         int i = left;
         int j = left;
         int n = right;
         while (j <= n) {
+
             if (array[j] < array[p]) {
                 swap(array, i, j);
                 i++;
@@ -142,9 +197,14 @@ public class Project {
             } else {
                 j = j + 1;
             }
+
         }
-        return ((i + n) / 2);
-    }
+
+
+
+        return ((i + n)/2);
+
+    }*/
 
 
     public static int insertionSortMedian(double array[], int left, int right) {
@@ -161,8 +221,8 @@ public class Project {
             array[j + 1] = key;
         }
 
-        median = (right + left) / 2;
-        return median;
+        median = (right - left) / 2;
+        return left + median;
     }
 
     public static void swap(double array[], int i, int j) {
