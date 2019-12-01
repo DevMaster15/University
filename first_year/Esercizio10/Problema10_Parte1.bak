@@ -1,0 +1,87 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname Problema10_Parte1) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+(define crit-cesare
+  (lambda(msg rule) ;msg: messasggio da inviare
+    
+    (if(string=? msg "")
+       msg
+       (string-append (string (rule (string-ref (elimina msg) 0) '(#\A #\B #\C #\D #\E #\F #\G #\H #\I #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\V #\X))) ;ciaomondo (senza spazi), prendo il primo carattere della stringa e lo passo a rule
+                      (crit-cesare (substring (elimina msg) 1) rule))))
+  )
+
+;#\A #\B #\C #\D #\E #\F #\G #\H #\I #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\V #\X
+
+;A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+;DOHD NDFAD HXA NBONBX FDHXDV GNCNA <- ALEA IACTA EST IVLIVS CAESAR DIXIT
+
+(define regola ;dato un carattere restituisce il carattere spostato di rot posizioni
+  (lambda(rot)
+    (lambda(c lst) ;c: primo carattere della stringa "ciaomondo"
+      
+      (let( (p (+ (numera lst c 0) rot)))
+        ;fare un'altra procedura che controlla il valore numerico e trova il corrispondente valore letterale della lista
+        (if(> p 19)
+           (converti (- p 20) lst 0)
+           (converti p lst 0)
+           )
+        )
+      )
+    )
+  )
+  
+
+
+(define numera
+  (lambda(lst c i) ;deve ritornare la posizione, quindi un numero
+    
+    (if(null? lst)
+       i
+       (if(char=? c (car lst))
+          i
+          (numera (cdr lst) c (+ i 1))
+          )
+       )
+    )
+  )
+
+(define conta ;restituisce il numero di spazi presenti nella stringa
+  (lambda(msg) 
+    
+    (if(string=? msg "")
+       0
+       (if(char=? (string-ref msg 0) #\space) ;se è uno spazio aumenta di 1
+          (+ 1 (conta (substring msg 1)))
+          (conta (substring msg 1))
+          
+          )
+       
+       )
+    )
+  )
+
+
+(define elimina ;restituisce la stringa a cui vengono rimossi eventuali spazi
+  (lambda(msg)
+    
+    (if (= (conta msg) 0)
+        msg
+        (elimina (list->string (remove #\space (string->list msg)))) ;converto da lista a stringa e rimuovo lo spazio della nuova sringa riconvertita in lista
+        )
+    )
+  )
+
+
+
+(define converti
+  (lambda(pos lst i) ;pos: valore numerico della posizione lista: lista dell'alfabeto latino
+    
+    (if(= pos i)
+       (list-ref lst i) ;ritorna il valore della lista corrispondente al valore in posizione i
+       (converti pos lst (+ i 1))
+       )
+       
+    )
+  )
+
+(crit-cesare " ALEA IACTA EST IVLIVS CAESAR DIXIT" (regola 3))

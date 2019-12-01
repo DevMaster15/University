@@ -1,0 +1,140 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |Problema 3|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define bin-rep->number ;Restituisce la conersione di una stringa binaria in stringa base 10 con relativo segno
+  (lambda (stringa);stringa: Stringa    
+    (cond
+     ((string=? (substring stringa 0 1) "+")(result (substring stringa 1)))
+     ((string=? (substring stringa 0 1) "-")(* (result (substring stringa 1)) -1))
+     (else (result stringa))
+    )
+  ))
+
+(define result; Restituisce la somma della conversione di parte intera e parte decimale
+  (lambda (stringa); stringa: Stringa
+     (if (= (findot stringa 0) (string-length stringa))
+      (convdecs (substring stringa 0 (findot stringa 0)) 0)
+      (+ (convdecs (substring stringa 0 (findot stringa 0)) 0) (convdecd (substring stringa (+ (findot stringa 0) 1) (string-length stringa)) 0 1))
+     )
+   ))
+
+(define convdecs ;Restituisce la conversione da binario a decimale della parte sinistra rispetto al punto
+  (lambda (str1 n1); str1: Stringa, n1: intero
+     (if (<= (string-length str1) 0)
+        n1
+        (cond          
+         ((string=? (substring str1 0 1) "1") (convdecs (substring str1 1) (+ (convs (- (string-length str1) 1)) n1) ))
+         ((string=? (substring str1 0 1) "0") (convdecs (substring str1 1) n1 ))         
+        ))
+    ))
+
+(define convdecd ;Restituisce la conversione da binario a decimale della parte destra rispetto al punto
+  (lambda (str1 n1 y);str1: Stringa, n1,y: interi
+    (if (<= (string-length str1) 0)
+        n1 
+        (cond 
+         ((string=? (substring str1 0 1) "1") (convdecd (substring str1 1) (+ (convd y) n1) (+ y 1)))
+         ((string=? (substring str1 0 1) "0") (convdecd (substring str1 1) n1 (+ y 1)))    
+        )))
+  )
+
+
+(define convs
+  (lambda (x)
+    (expt 2 x)
+    ))
+
+(define convd
+  (lambda (x)
+    (expt 1/2 x)
+    ))
+
+(define findot ;Restituisce la posizione del punto nella stringa
+  (lambda (str n) ;str: stringa, n: intero 
+       (if (= (string-length str) 0)   
+           n    
+           (cond
+            ((string=? (substring str 0 1) ".") (findot "" n))
+             (else (findot (substring str 1) (+ n 1)))
+           )))
+  )
+
+;=======================================================================================================
+
+;PARTE 2
+
+(define rep->number; Converte una stringa di simboli in base 10 prendendo come riferimento una stringa di simboli che rappresentano la base della seconda stringa 
+  (lambda (cifre str) ;str,cifre :Stringhe
+    (sgncontrol str cifre)   
+    )
+  )
+
+(define sgncontrol; Aggiunge il segno alla stringa creata con stringcreate
+  (lambda (str cifre) ;str,cifre: Stringa
+    (cond
+     ((string=? (substring str 0 1) "+")(stringcreate (substring str 1) cifre))
+     ((string=? (substring str 0 1) "-")(string-append "-" (stringcreate (substring str 1) cifre)))
+     (else(stringcreate str cifre))
+     )
+  ))
+
+(define stringcreate; Crea la stringa unendo il valore della parte destra con quello della parte sinistra
+  (lambda (str cifre) ; str,cifre: Stringhe
+    (if (= (string-length str) (findot str 0))
+        (number->string (rep->dec str 0 cifre))
+        (string-append (number->string (rep->dec (substring str 0 (findot str 0)) 0 cifre))
+         "." (number->string (rep->dec (substring str (findot str 1) (string-length str)) 1 cifre))
+         ))
+    ))
+
+
+
+
+(define peso ;Restituisce il valore di n in base alla sua posizione in "cifre"  1st pos = 0 NOTA c=0 
+  (lambda (cifre n c) ;cifre: Stringa n,c: interi
+    (let ((char (if (> (string-length cifre) 0)(substring cifre 0 1) ""))
+          (remove1 (if (> (string-length cifre) 0) (substring cifre 1) "")))
+      (if (string=? char n)
+          c
+          (peso remove1 n (+ c 1))
+          ))
+    ))
+
+
+(define rep->dec
+  (lambda (str sgn cifre) ; sgn: intero (0 = sinistra) (1 o altro = destra) str,cifre: Stringhe
+    (if (= sgn 0)
+        (convs1 str 0 cifre)
+        (convd1 str 0 cifre 0)
+        )
+    ))
+
+(define convs1 ; Restituisce il valore della parte a sinistra del punto
+  (lambda (str n cifre) ;[str]str,cifre [int]n
+   (let ((remove1 (if (> (string-length str) 0) (substring str 1) ""))
+         (char (if (> (string-length str) 0)(substring str 0 1) ""))
+         (base (string-length cifre))
+         (pesochar (peso cifre (if (> (string-length str) 0) (substring str 0 1) "") 0))) 
+    (if (> (string-length str) 0)
+     (if (= pesochar 0)
+      (convs1 remove1 n cifre)
+      (convs1 remove1 (+ (* (expt base (- (string-length str) 1)) pesochar) n) cifre)  
+      )
+     n
+     )
+   )))
+
+(define convd1 ; Restituisce il valore della parte a destra del punto
+  (lambda (str n cifre c) ;str, cifre: Stringa n,c: interi
+   (let ((remove1 (if (> (string-length str) 0)(substring str 1)""))
+         (char (if (> (string-length str) 0)(substring str 0 1)""))
+         (base (string-length cifre))
+         (pesochar (peso cifre (if (> (string-length str) 0)(substring str 0 1)"") 0))) 
+    (if (> (string-length str) 0)
+     (if (= pesochar 0)
+      (convd1 remove1 n cifre c)
+      (convd1 remove1 (+ (* (expt (/ 1 base) (+ c 1)) pesochar) n) cifre c)  
+      )
+     n
+     )
+   )))
