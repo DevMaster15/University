@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="795a8d4c-45e5-441a-8e78-723ba2cdb937" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progetto/out/production/ProgettoASD/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Progetto/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progetto/src/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../python_code/message_tg.py" beforeDir="false" afterPath="$PROJECT_DIR$/../python_code/message_tg.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,6 +88,9 @@
       <workItem from="1574673646377" duration="2166000" />
       <workItem from="1574754733279" duration="1153000" />
       <workItem from="1574756028656" duration="5150000" />
+      <workItem from="1574778713613" duration="29000" />
+      <workItem from="1574780668726" duration="3559000" />
+      <workItem from="1574784943984" duration="924000" />
     </task>
     <task id="LOCAL-00001" summary="Ho aggiunto un commento sopra il main">
       <created>1574327513129</created>
