@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="795a8d4c-45e5-441a-8e78-723ba2cdb937" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../CodeWar/MorseCode.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progetto/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +31,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -91,6 +95,18 @@
       <workItem from="1574778713613" duration="29000" />
       <workItem from="1574780668726" duration="3559000" />
       <workItem from="1574784943984" duration="924000" />
+      <workItem from="1574801287324" duration="63000" />
+      <workItem from="1574843327805" duration="9767000" />
+      <workItem from="1574861938269" duration="8629000" />
+      <workItem from="1574941321742" duration="2225000" />
+      <workItem from="1574953675967" duration="2211000" />
+      <workItem from="1575052791356" duration="218000" />
+      <workItem from="1575057137588" duration="3100000" />
+      <workItem from="1575105171945" duration="6070000" />
+      <workItem from="1575190338391" duration="1374000" />
+      <workItem from="1575191728200" duration="97000" />
+      <workItem from="1575199063740" duration="1089000" />
+      <workItem from="1575209299315" duration="433000" />
     </task>
     <task id="LOCAL-00001" summary="Ho aggiunto un commento sopra il main">
       <created>1574327513129</created>

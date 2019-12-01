@@ -178,131 +178,90 @@ public class CalcoloTempi {
         return e;
     }
 
-
-    /**
-     * Start è la funzione da cui parte l'intera procedura
-     * c'è la prima chiamata a pivot e partition per sistemare l'array attorno ad un valore
-     * le somme degli elementi a sinistra e destra del pivot
-     * la somma di tutti gli elementi
-     *
-     * e la chiamata alla procedura medianaPesata
-     *
-     * @param array di valori double
-     * @return 0 se la sommaTotale (di tutti gli elementi = 0)
-     * @return il risultato della procedua medianaPesata() che sarà la mediana pesata inferiore
-     */
-
-    public static double start(double array[]) {
+    //il programma parte da qua, calcolando per la prima volta tutti i valori
+    public static double start(double array[]){
         int left = 0;
         int right = array.length - 1;
-        int p = pivot(array, left, right);
-        int pivotIndex = partition(array, left, right, p);
+        int array_idx[] = new int[2];
+        array_idx = threeWayPartition(array, left, right); //mi ritorna un array di due posizioni
 
-        double sommaLeftPivot = add(array, 0, pivotIndex - 1); //somma da  fino all'elemento
-        double sommaRightPivot = add(array, pivotIndex + 1, array.length - 1); //ok
-        double sommaTotale = sommaRightPivot + sommaLeftPivot + array[pivotIndex];
-        double sommaMezzi = sommaTotale/2;
+        //calcolo le varie somme
+        double sommaLeftPivot = add(array, 0, array_idx[0] - 1);
+        double sommaRightPivot = add(array, array_idx[1] + 1, right );
+        double sommaTotale = add(array, left, right); //modificato qua la somma
 
+        //se la sommaTotale = 0 signfica che tutti gli elementi sono = 0, visto che non ci possono essere elementi negativi
         if(sommaTotale == 0)
             return 0;
-        else{
-            while(!(sommaLeftPivot < sommaMezzi && sommaRightPivot <= sommaMezzi)){
-                //input.nextLine();
-                if(sommaLeftPivot >= sommaMezzi){
-                    right = pivotIndex;
-                    p = pivot(array, left, right);
-                    pivotIndex = partition(array, left, right, p);
-                    sommaRightPivot = sommaRightPivot + add(array, pivotIndex + 1, right);
-                    sommaLeftPivot = sommaTotale - sommaRightPivot - array[pivotIndex];
-                } else {
-                    left = pivotIndex;
-                    p = pivot(array, left, right);
-                    pivotIndex = partition(array, left, right, p);
-                    sommaLeftPivot = sommaLeftPivot + add(array, left, pivotIndex - 1);
-                    sommaRightPivot = sommaTotale - sommaLeftPivot - array[pivotIndex];
-                }
-            }
 
-        }
-
-        return array[pivotIndex];
+        //richiamo weightedMedian con questi valori, e controllo se la condizione i base si verifica
+        //se si verifica il problema è stato risolto e restituisco il valore
+        //sennò mi sposto intorno al vettore in cerca del risultato
+        return weightedMedian(array, left, right, sommaLeftPivot, sommaRightPivot, sommaTotale, sommaTotale/2, array_idx);
     }
 
-    /**
-     * Prende in input un intero left che indica l'indice di inizio
-     *     dell'array/sottoarray, e un right per la fine, e un array di double.
-     *     Divide l'array in gruppi di 5 elementi ciascuno, e ne calcola la mediana.
-     *     Ricorsivamente poi calcola la mediana delle mediane:
-     *     1)  A intervalli di 5 in 5, applica median ai sottoarray, calcolandone
-     *         le mediane
-     *     2)  Le raggruppa tramite swap, a sinistra dell'array.
-     *     3)  Quando ha trovato le n/5 mediane, calcola ricorsivamente le medinae
-     *         sul sottoarray di inizi left e fine count.
-     *     4)  Quando il gruppo di mediane a inizio array è minore o uguale a 5,
-     *         ne calcola la mediana e ne restituisce l'indice.
-     *
-     * @param array
-     * @param left
-     * @param right
-     * @return
-     */
 
-    private static int pivot(double array[], int left, int right) {
+    //metodo "cuore" del sistema
+    public static double weightedMedian(double array[], int left, int right, double sommaLeftPivot,
+                                        double sommaRightPivot, double sommaTotale, double sommaMezzi, int arrayIndici[]) {
 
-        if ((right - left) <= 5) {
-            return insertionSortMedian(array, left, right);
-        }
 
-        int count = left;
 
-        for (int i = left; i <= right; i += 5) {
-            int tmpRight = i + 4;
+        if (sommaLeftPivot < sommaMezzi && sommaRightPivot <= sommaMezzi) //controllo se la condizione è verificata, se lo è restituisco il valore
+            return array[arrayIndici[0]];
 
-            if (tmpRight > right) {
-                tmpRight = right;
-            }
+        else {
+            if (sommaLeftPivot >= sommaMezzi) { //se non lo è controllo se l'elemento si trova nella parte sinistra
+                //se si trova a sinistra mi sposto, e devo escludere la parte destra dal resto dei controlli
 
-            int tmpMed;
-            tmpMed = insertionSortMedian(array, i, tmpRight);
-            swap(array, tmpMed, count);
-            count++;
-        }
-        count--;
-        return pivot(array, left, count);
-    }
+                int tmpright = arrayIndici[0]; //tmpRight sarà il nuovo right, visto che devo escludere la parte a destra del pivot
 
-    /**
-     * prende come parametri l'array di double e gli indice left e right che indicano rispettivamente
-     * l'indice più a sinistra e più a destra dell'array/sottoarray, e l'indice p che è l'indice del pivot
-     *
-     * questa procedura "divide" l'array in tre parti da left
-     *
-     * @param array
-     * @param left
-     * @param right
-     * @param p
-     * @return
-     */
+                arrayIndici = threeWayPartition(array, left, tmpright);
 
-    public static int partition(double[] array, int left, int right, int p) {
-        int i = left;
-        int j = left;
-        int n = right;
-        while (j <= n) {
-            if (array[j] < array[p]) {
-                swap(array, i, j);
-                i++;
-                j++;
-            } else if (array[j] > array[p]) {
-                swap(array, j, n);
-                n = n - 1;
+                sommaRightPivot = sommaRightPivot + add(array, arrayIndici[1] + 1, tmpright); //ricalcolo le somme
+                sommaLeftPivot = add(array, left, arrayIndici[0] - 1);
+
+
+                //faccio la ricorsione passando i nuovi valori ed il "nuovo" sotto array con indici left e tmpRight
+                return weightedMedian(array, left, tmpright, sommaLeftPivot, sommaRightPivot, sommaTotale, sommaMezzi, arrayIndici);
+
             } else {
-                j = j + 1;
+                //se non si trova a sinistra vuol dire che si trova a destra
+                //quindi mi sposto a destra e ricalcolo i valori escludendno la parte sinistra dal resto dei controlli
+
+                int tmpleft = arrayIndici[1]; //tmpLeft sarà il nuovo left, visto che devo escludere la parte a sinistra del pivot
+
+                arrayIndici = threeWayPartition(array, tmpleft, right);
+
+                sommaLeftPivot = sommaLeftPivot + add(array, tmpleft, arrayIndici[0] - 1); //ricalcolo le somme
+                sommaRightPivot = add(array, arrayIndici[1]+1, right);
+
+                //faccio la ricorsione passando i nuovi valori ed il "nuovo" sotto array con indici temLeft e right
+                return weightedMedian(array, tmpleft, right, sommaLeftPivot, sommaRightPivot, sommaTotale, sommaMezzi, arrayIndici);
             }
         }
-        return ((i + n) / 2);
     }
 
+    public static int[] threeWayPartition(double array[], int start, int stop){
+        double perno=array[stop-1], aux;
+        int min=start, max=stop-2;
+        int i=start;
+        int[] posizioni=new int[2];
+        while(i<=max){
+            if(array[i]<perno){
+                swap(array, i++, min++);
+            }else if(array[i]>perno){
+                swap(array, i, max--);
+            }
+            else{
+                i++;
+            }
+        }
+        swap(array, stop-1, ++max);
+        posizioni[0]=min;
+        posizioni[1]=max;
+        return posizioni;
+    }
 
     public static int insertionSortMedian(double array[], int left, int right) {
 
@@ -318,16 +277,18 @@ public class CalcoloTempi {
             array[j + 1] = key;
         }
 
-        median = (right + left) / 2;
-        return median;
+        median = (right - left) / 2;
+        return left + median;
     }
 
+    //metodo che fa lo scambio
     public static void swap(double array[], int i, int j) {
         double temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
 
+    //metodo che fa la somma
     public static double add(double array[], int left, int right) {
         double somma = 0;
 
@@ -337,5 +298,6 @@ public class CalcoloTempi {
 
         return somma;
     }
+
 
 }
