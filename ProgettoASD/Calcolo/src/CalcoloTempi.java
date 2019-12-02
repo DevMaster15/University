@@ -258,7 +258,7 @@ public class CalcoloTempi {
                 i++;
             }
         }
-        
+
         swap(array, stop-1, ++max);
         positions[0]=min;
         positions[1]=max;
