@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="795a8d4c-45e5-441a-8e78-723ba2cdb937" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Calcolo/src/CalcoloTempi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/Project.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progetto/src/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/testT.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto/src/writeInAfile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto/src/writeInAfile.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +33,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Scrivania/prove.java" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -105,6 +110,15 @@
       <workItem from="1575199063740" duration="1089000" />
       <workItem from="1575209299315" duration="1820000" />
       <workItem from="1575316165135" duration="1215000" />
+      <workItem from="1575396161783" duration="1433000" />
+      <workItem from="1575450193381" duration="3029000" />
+      <workItem from="1575457170172" duration="1009000" />
+      <workItem from="1575465496500" duration="6559000" />
+      <workItem from="1575480030165" duration="69000" />
+      <workItem from="1575492863732" duration="401000" />
+      <workItem from="1575533066959" duration="3291000" />
+      <workItem from="1575553732355" duration="2505000" />
+      <workItem from="1575637736302" duration="1972000" />
     </task>
     <task id="LOCAL-00001" summary="Ho aggiunto un commento sopra il main">
       <created>1574327513129</created>

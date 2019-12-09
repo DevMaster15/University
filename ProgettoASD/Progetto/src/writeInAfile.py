@@ -4,7 +4,7 @@ import os
 
 def writeFile(n):
 
-    file_descriptor=open("test.txt", "w") #file descriptor
+    file_descriptor=open("numbers.txt", "w") #file descriptor
 
     print("Type the upper bound of the range: ")
     max_value = (int)(input())
