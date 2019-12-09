@@ -46,7 +46,8 @@ public class Project {
         int array_idx[] = new int[2];
         int pivot_idx = pivot(array, left_idx, right_idx-1);
         array_idx = threeWayPartition(array, left_idx, right_idx, pivot_idx); //mi ritorna un array di due posizioni
-
+        System.out.println("array_idx[0] = " + array_idx[0]);
+        System.out.println("array_idx[1] = " + array_idx[1]);
         //calcolo le varie somme
         double sumLeftPivot = add(array, 0, array_idx[0] - 1);
         double sumRightPivot = add(array, array_idx[1] + 1, right_idx-1);
@@ -67,8 +68,7 @@ public class Project {
     public static double weightedMedianRec(double array[], int left_idx, int right_idx, double sumLeftPivot,
                                         double sumRightPivot, double sumTotale, double sumTarget, int arrayIndex[]) {
 
-
-
+        System.out.println("SommaLeft " + sumLeftPivot + "\tSommaRight " + sumRightPivot);
         if (sumLeftPivot < sumTarget && sumRightPivot <= sumTarget) //controllo se la condizione è verificata, se lo è restituisco il valore
             return array[arrayIndex[0]];
 
@@ -179,6 +179,7 @@ public class Project {
     public static double add(double array[], int left, int right) {
         double somma = 0;
 
+        System.out.println("left = " + left + "\tright = " + right);
         for (int i = left; i <= right; i++) {
             somma += array[i];
         }
