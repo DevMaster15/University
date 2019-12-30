@@ -1,196 +1,41 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.io.File;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.lang.Math;
 
-public class CalcoloTempi {
-    public static seedStorage seedList = new seedStorage();
-    public static Scanner input = new Scanner(System.in);
+public class progetto{
 
-    public static void main(String[] args) throws IOException {
-        System.out.println("Inserisci la dimensione dell'array: ");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
-        int dim = 100000;
+    //questo è il progetto
+    public static void main(String args[]) {
 
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String input = "";
 
-        String[] parts = input.split(" ");
-        int[] inputFinal = new int[parts.length];
-
-        for (int j = 0; j < inputFinal.length; j++) {
-            int e = Integer.parseInt(parts[j]);
-            inputFinal[j] = e;
+        //prendo l'input da standard input, nella pratica reindirizzo da un file di testo
+        try {
+            input = reader.readLine();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        int n = inputFinal[0];
-        seedList.insert((double) System.currentTimeMillis() / 100000);
-        double tMin = tMin();
-        double result = misurazione(n, tMin);
-        System.out.println("Tempo: " + result * 1 / 1000 + " secondi.");
+        input = input.replace(" ", ""); //rimpiazza gli spazi con nessuno spazio
+        String[] str = input.split(",|.$", -1); //elimino dalla stringa le virgole ed i punti (se ci sono)
 
+        double array[] = new double[str.length - 1];
+        double arrayFinale[] = new double[str.length-1];
+        //converto uno ad uno gli elementi della stringa in elementi di tipo double
+        //inserisco tali elementi nell'array
+        for (int i = 0; i < str.length - 1; i++) {
+            array[i] = Double.valueOf(str[i]);
+        }
 
-
+        int result = start(array);
+        System.out.println("result = " + array[result]);
 
     }
-   
-    public static long granularita() {
-        long t0 = System.currentTimeMillis();
-        long t1 = System.currentTimeMillis();
-        while (t0 == t1) {
-            t1 = System.currentTimeMillis();
-        }
-        return (t1 - t0);
-    }
 
-    public static double tMin() {
-        return granularita() * 20;
-    }
-
-    public static int calcolaRipP(int n, double tMin) {
-        double t0 = 0;
-        double t1 = 0;
-        int rip = 1;
-        double[] e;
-        while (t1 - t0 <= tMin) {
-            rip = 2 * rip;
-            t0 = System.currentTimeMillis();
-            for (int i = 0; i < rip; i++) {
-                e = prepara(n);
-            }
-            t1 = System.currentTimeMillis();
-        }
-        int max = rip;
-        int min = rip / 2;
-        int cicliErrati = 5;
-        while (max - min >= cicliErrati) {
-            rip = (max + min) / 2;
-            t0 = System.currentTimeMillis();
-            for (int i = 0; i < rip; i++) {
-                e = prepara(n);
-            }
-            t1 = System.currentTimeMillis();
-            if (t1 - t0 <= tMin) {
-                min = rip;
-            } else {
-                max = rip;
-            }
-        }
-        return max;
-    }
-
-    public static int calcolaRipPW(int n, double tMin) {
-        double t0 = 0;
-        double t1 = 0;
-        int rip = 1;
-        double[] e;
-        while (t1 - t0 <= tMin) {
-            rip = 2 * rip;
-            t0 = System.currentTimeMillis();
-            for (int i = 0; i < rip; i++) {
-                e = prepara(n);
-                start(e);
-            }
-            t1 = System.currentTimeMillis();
-        }
-        int max = rip;
-        int min = rip / 2;
-        int cicliErrati = 5;
-        while (max - min >= cicliErrati) {
-            rip = (max + min) / 2;
-            t0 = System.currentTimeMillis();
-            for (int i = 0; i < rip; i++) {
-                e = prepara(n);
-                start(e);
-            }
-            t1 = System.currentTimeMillis();
-            if (t1 - t0 <= tMin) {
-                min = rip;
-            } else {
-                max = rip;
-            }
-        }
-        return max;
-    }
-
-    public static double[] prepara(int n) {
-        double[] d = new double[n];
-        for (int i = 0; i < n; i++) {
-            
-            d[i] = pseudoRandom();
-            
-        }
-        return d;
-    }
-
-    public static double pseudoRandom() {
-        double seed = seedList.getSeed();
-        int a = 16807;
-        int m = 2147483647;
-        int q = 127773;
-        int r = 2836;
-        int hi = (int) (seed / q);
-        double lo = seed - q * hi;
-        double test = a * lo - r * hi;
-        if (test < 0) {
-            seedList.delete();
-            seedList.insert(test + m);
-        } else {
-            seedList.delete();
-            seedList.insert(test);
-        }
-        return seed/m;
-    }
-
-    public static double tempoMedioNetto(int n, double tMin) {
-        int ripTara = calcolaRipP(n, tMin);
-        int ripLordo = calcolaRipPW(n, tMin);
-        double[] e = new double[n];
-        double t0 = System.currentTimeMillis();
-        for (int i = 0; i < ripTara; i++) {
-            e = prepara(n);
-        }
-        long t1 = System.currentTimeMillis();
-        double tTara =  t1 - t0;
-        t0 = System.currentTimeMillis();
-        for (int i = 0; i < ripLordo; i++) {
-            e = prepara(n);
-            start(e);
-        }
-        t1 = System.currentTimeMillis();
-        double tLordo = t1 - t0;
-        double tMedio = (tLordo / ripLordo) - (tTara / ripTara);
-        return tMedio;
-    }
-
-    public static double misurazione(int n, double tMin) {
-        int c = 10;
-        double t = 0;
-        double sum2 = 0;
-        double cn = 0;
-        double delta = Double.MAX_VALUE;
-        double e = 0;
-
-        while (!(delta < (e / 20))) {
-            for (int i = 0; i < c; i++) {
-                double m = tempoMedioNetto(n, tMin);
-                t = t + m;
-                sum2 = sum2 + (m * m);
-            }
-
-            cn = cn + c;
-            e = t / cn;
-            double s = Math.sqrt(sum2 / cn - (e * e));
-            delta = ( 1 / Math.sqrt(cn)) * s * 1.96;
-        }
-        return e;
-    }
-
-   
-   private static int start(double array[]){
+    private static int start(double array[]){
         
         double sommaTotale = add(array, 0, array.length - 1);
         if(sommaTotale == 0) //se uguale a 0 significa che ho tutti 0
@@ -204,25 +49,33 @@ public class CalcoloTempi {
         }
     }
 
+
+    /*
+        metodo principale in cui si richiamano le varie procedure necessarie alla risoluzione del problema
+        restituisce il risultato oppure richiama se stessa ricorsivamente spostandosi a sinistra o destra
+        dell'array
+
+    */
     private static int findWk(double array[], int left, int right, double sumCarry, double sumTarget){
 
         int arrayIndex[] = new int[2];
 
         if(left < right){
-            int med = (right + left)/2;
-            int index = select(array, left, right, med);
+            int med = (right + left)/2; //indice elemento mediano
+
+            int index = select(array, left, right, med); //index contiene l'indice del mediano reale
             arrayIndex = findIndex(array, index, right);
-            double sum =  add(array, left, arrayIndex[0]);
+            double sum =  add(array, left, arrayIndex[0]);  //somma fino ad index
            
 
-            if(sum + sumCarry < sumTarget){
+            if(sum + sumCarry < sumTarget){ //l'elemento si trova a destra del vettore
                 
                 left = arrayIndex[0] + 1;
                 sumCarry = sumCarry + sum;
 
                 return findWk(array, left, right, sumCarry, sumTarget);
 
-            } else if(sum + sumCarry > sumTarget){
+            } else if(sum + sumCarry > sumTarget){  //l'elemento si trova a sinistra
 
                 right = arrayIndex[0];
         
@@ -232,12 +85,13 @@ public class CalcoloTempi {
             } else  return arrayIndex[0];
         }
 
-        return left;
+        return left;    //se nessuna delle precedenti condizioni si è verificata significa che c'è un solo elemento
        
     }
-    /**
+
+    /*
         ritorna l'elemento il num-esimo elemento più piccolo. In questo caso num = (right - left)/2
-     */
+    */
     private static int select(double array[], int left, int right, int num){
 
         int arrayIndex[] = new int[2];
@@ -394,5 +248,5 @@ public class CalcoloTempi {
         }
     }
 
-}
 
+}
